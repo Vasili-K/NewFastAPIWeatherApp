@@ -20,6 +20,9 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
 
+      - name: Run static analysis
+        run: pylint --disable=C0114,C0115,C0116,R0903 app
+
       - name: Run unit tests
         run: pytest
 

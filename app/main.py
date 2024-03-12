@@ -4,28 +4,28 @@ from app.db import database, WeatherUser, Weather
 from app.models.weather_models import WeatherResponse
 from app.weather_request import request_weather
 
-# weather_router = APIRouter()
+weather_router = APIRouter()
 
 # main point of interaction to create API
 app = FastAPI()
 
 
-@app.get("/")
+@weather_router.get("/")
 async def root():
     return {"message": "Hello From Weather Application"}
 
 
-@app.get("/users")
+@weather_router.get("/users")
 async def read_root():
     return await WeatherUser.objects.all()
 
 
-@app.get("/weather")
+@weather_router.get("/weather")
 async def get_weather(city: str, save: bool = True) -> WeatherResponse | str:
     result = await request_weather(city)
     try:
         weather_description = WeatherResponse(**result)
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         return "Probably you asked for something unexpected. Try another request."
 
     if save:
@@ -48,5 +48,4 @@ async def shutdown():
         await database.disconnect()
 
 
-# app.include_router(weather_router, prefix="/api/v1", tags=["Weather Endpoint"])
-
+app.include_router(weather_router, prefix="/api/v1", tags=["Weather Endpoint"])

@@ -15,7 +15,7 @@ class BaseMeta(ormar.ModelMeta):
     database = database
 
 
-class Weather(ormar.Model):
+class Weather(ormar.Model):  # pylint: disable=too-many-ancestors
     class Meta(BaseMeta):
         tablename = "weather"
 
@@ -31,7 +31,7 @@ class Weather(ormar.Model):
     created_on = ormar.DateTime(default=datetime.now())
 
 
-class WeatherUser(ormar.Model):
+class WeatherUser(ormar.Model):  # pylint: disable=too-many-ancestors
     class Meta(BaseMeta):
         tablename = "users"
 

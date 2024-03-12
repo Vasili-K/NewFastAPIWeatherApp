@@ -1,4 +1,10 @@
 def parse_weather_data(weather_row_data: dict) -> dict:
+    """
+    This function is responsible for preparation of information about requested weather
+
+    :param weather_row_data: dict with all the data received from weather API
+    :return: dict with a set of required weather data
+    """
     try:
         weather_city = weather_row_data["name"]
         weather_country = weather_row_data["sys"]["country"]
