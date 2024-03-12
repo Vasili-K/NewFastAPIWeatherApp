@@ -19,6 +19,11 @@ jobs:
 
       - name: install dependencies
         run: pip install -r requirements.txt
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Run static analysis
         run: pylint --disable=C0114,C0115,C0116,R0903 app
